@@ -164,6 +164,8 @@ class DMDFrame
   void scrollY(int scrollBy);
   void scrollX(int scrollBy);
   void marqueeScrollX(int scrollBy);
+  void marqueeScrollX1(int scrollBy);
+  void marqueeScrollX2(int scrollBy);
   void marqueeScrollY(int scrollBy);
 
   void swapBuffers(DMDFrame &other);
