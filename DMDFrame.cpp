@@ -273,6 +273,36 @@ void DMDFrame::marqueeScrollX(int scrollBy) {
     copyFrame(frame, 0, 0); // drop back at left edge
   }
 }
+void DMDFrame::marqueeScrollX1(int scrollBy) {
+  // Scrolling is basically the same as normal scrolling, but we save/restore the overlapping
+  // area in between to create the marquee effect
+  scrollBy = scrollBy % width;
+
+  if(scrollBy < 0)  { // Scroll left
+    DMDFrame frame = subFrame(0, 0, -scrollBy, 8); // save leftmost
+    movePixels(-scrollBy, 0, 0, 0, width + scrollBy, 8); // move
+    copyFrame(frame, width+scrollBy, 0); // drop back at right edge
+  } else { // Scroll right
+    DMDFrame frame = subFrame(width-scrollBy, 0, scrollBy, 8); // save rightmost
+    movePixels(0, 0, scrollBy, 0, width - scrollBy, 8); // move
+    copyFrame(frame, 0, 0); // drop back at left edge
+  }
+}
+void DMDFrame::marqueeScrollX2(int scrollBy) {
+    // Scrolling is basically the same as normal scrolling, but we save/restore the overlapping
+  // area in between to create the marquee effect
+  scrollBy = scrollBy % width;
+
+  if(scrollBy < 0)  { // Scroll left
+    DMDFrame frame = subFrame(0, 8, -scrollBy, 8); // save leftmost
+    movePixels(-scrollBy, 8, 0, 8, width + scrollBy, 8); // move
+    copyFrame(frame, width+scrollBy,8); // drop back at right edge
+  } else { // Scroll right
+    DMDFrame frame = subFrame(width-scrollBy, 0, scrollBy, 8); // save rightmost
+    movePixels(0, 0, scrollBy, 0, width - scrollBy, 8); // move
+    copyFrame(frame, 0, 0); // drop back at left edge
+  }
+}
 
 void DMDFrame::marqueeScrollY(int scrollBy) {
   scrollBy = scrollBy % height;
